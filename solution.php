@@ -31,17 +31,17 @@ $board = [
       [0,0,0,2,1,1,1],
       [0,1,4,2,1,1,1],
       [3,9,8,2,1,1,2],
-      [3,3,3,3,2,3,2],
+      [3,3,3,3,3,3,2],
  ];
 
 $result = countChains($board);
 echo $result;
 
 function countChains($data = "") {
-    $horizontal = countHorizontal($data);
-    $vertical = countVertical($data);
-    if($vertical >= $horizontal) return $vertical;
-    else return $horizontal;
+    $processCount = array();
+    $processCount[] = countHorizontal($data);
+    $processCount[] = countVertical($data);
+    return max($processCount);
 }
 
 function countVertical($data = "") {
@@ -93,7 +93,6 @@ function getTotal($data = "") {
     while($i < count($data)) {
         $unique[$data[$i]] = 1;
         if(count($unique) > 1) {
-            if(isset($data[$i-1])) unset($unique[$data[$i-1]]);
             $counter = 1;
         } else {
             $counter++;
